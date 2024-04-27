@@ -5,9 +5,6 @@ function Homepage() {
   // radio buttons for the amount of videos
   const [selectedOption, setSelectedOption] = useState('');
 
-  // to store the URL
-  const [linkUrl, setLinkUrl] = useState('');
-
   // the state of the checkbox for inputting time
   const [wantToInputTime, setWantToInputTime] = useState(false);
 
@@ -37,7 +34,19 @@ const handleSubmit = async () => {
     return;
   }
 
-  // Code to get current tab URL
+  // to store url
+  let currentTabUrl = null;
+  
+  // getting current window url
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    if (tabs[0]?.url) {
+      currentTabUrl = tabs[0].url;
+      // display url in an alert for testing
+      alert("Current tab URL: " + currentTabUrl);
+      // call jaxons script
+
+    }
+  });
 };
 
   // JSX for displaying in the popup
