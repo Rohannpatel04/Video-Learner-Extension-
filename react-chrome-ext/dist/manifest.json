@@ -1,10 +1,10 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "manifest_version": 3,
-    "name": "React Chrome Extension",
-    "description": "This is a Chrome extension built with React and TypeScript",
+    "name": "Video Learner Extension",
+    "description": "This is a Chrome extension built with React and TypeScript that will find youtube videos relevent to the text information on the page. User selects one or more videos and how long they should be.",
     "action": {
         "default_popup": "dist/js/index.html",
-        "default_title": "React Chrome Extension"
+        "default_title": "Video Learner"
     }
 }
