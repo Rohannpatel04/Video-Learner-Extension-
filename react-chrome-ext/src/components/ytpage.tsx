@@ -10,7 +10,7 @@ function Ytpage() {
       </div>
       <div className="display-links-container">
         <h2 className="display-links-heading">Here are the related YouTube videos</h2> 
-        <a href="https://www.w3schools.com/" target="_blank" rel="noreferrer" className="a">Visit the youtube video</a>
+        <a href="https://www.youtube.com/watch?v=7k4kDf7zTfQ" target="_blank" rel="noreferrer" className="display-link">Visit the youtube video</a>
       </div>
     </div>
   );

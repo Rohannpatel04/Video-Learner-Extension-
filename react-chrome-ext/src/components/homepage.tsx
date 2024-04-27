@@ -1,74 +1,59 @@
 import React, { useState } from "react";
 import '../css/homepage.css';
-import { exec } from 'child_process';
 
 function Homepage() {
   // radio buttons for the amount of videos
-  const [selectedOption, setSelectedOption] = useState('');
+  // const [selectedOption, setSelectedOption] = useState('');
 
   // the state of the checkbox for inputting time
   const [wantToInputTime, setWantToInputTime] = useState(false);
 
-  // state for hours and minutes
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+  // state for max and min video durations in minutes
+  const [maxVideoDuration, setMaxVideoDuration] = useState(0);
+  const [minVideoDuration, setMinVideoDuration] = useState(0);
+
+  // function to convert minutes to seconds
+  const convertToSeconds = (minutes: number) => {
+    return minutes * 60;
+  };
 
   // when the radio button selected changes
-  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(event.target.value);
-  };
-
-  // when the box is checked
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setWantToInputTime(event.target.checked);
-  };
+  // const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSelectedOption(event.target.value);
+  // };
 
   // submit button
-const handleSubmit = async () => {
-  if (!selectedOption) {
-    alert("Please select an option.");
-    return;
-  }
-
-  if (wantToInputTime && (hours === 0 && minutes === 0)) {
-    alert("Please enter a time.");
-    return;
-  }
-
-  // to store url
-  let currentTabUrl = null;
-
-  // getting current window url
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    if (tabs[0]?.url) {
-      currentTabUrl = tabs[0].url;
-      // display url in an alert for testing
-      alert("Current tab URL: " + currentTabUrl);
-      // call jaxons script
-      callNodeScript(currentTabUrl);
+  const handleSubmit = async () => {
+    if (wantToInputTime && (maxVideoDuration === 0 || minVideoDuration === 0)) {
+      alert("Please enter both maximum and minimum video durations.");
+      return;
     }
-  });
-};
-function callNodeScript(urlOrFilePath: string) {
-  exec(`node html_to_txt.js ${urlOrFilePath}`, (error, stdout, stderr) => {
-      if (error) {
-          console.error(`Error: ${error.message}`);
-          return;
+
+    // Convert durations to seconds
+    const maxVideoDurationInSeconds = convertToSeconds(maxVideoDuration);
+    const minVideoDurationInSeconds = convertToSeconds(minVideoDuration);
+
+    // to store url
+    let currentTabUrl = null;
+    
+    // getting current window url
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      if (tabs[0]?.url) {
+        currentTabUrl = tabs[0].url;
+        // display url in an alert for testing
+        alert("Current tab URL: " + currentTabUrl);
+        // call jaxons script
       }
-      if (stderr) {
-          console.error(`stderr: ${stderr}`);
-          return;
-      }
-      console.log(`stdout: ${stdout}`);
-  });
-}
+    });
+  };
+
   // JSX for displaying in the popup
   return (
     <div className="popup-window">
       <div className="title-container">
         <h2 className="title">Video Learner</h2>
       </div>
-      <div className="radio-container">
+      {/* <div className="radio-container">
         <h2 className="question-one">Select how many videos you want</h2>
         <div className="one-video-container">
           <label>
@@ -92,7 +77,7 @@ function callNodeScript(urlOrFilePath: string) {
             Multiple Videos
           </label>
         </div>
-      </div>
+      </div> */}
       <div className="time-input-container">
         <h2 className="question-two">Do you want to give an ideal video length?</h2>
         <div className="checkbox-container">
@@ -101,7 +86,7 @@ function callNodeScript(urlOrFilePath: string) {
             <input
               type="checkbox"
               checked={wantToInputTime}
-              onChange={handleCheckboxChange}
+              onChange={() => setWantToInputTime(!wantToInputTime)}
             />
             <span className="checkmark"></span>
           </label>
@@ -109,23 +94,23 @@ function callNodeScript(urlOrFilePath: string) {
         {wantToInputTime && (
           <div className="time-dropdown-container">
             <label className="hours-label">
-              Hours:{" "}
+              Max Video Duration (mins):{" "}
               <input
                 type="number"
-                value={hours}
-                onChange={(e) => setHours(parseInt(e.target.value))}
+                value={maxVideoDuration}
+                onChange={(e) => setMaxVideoDuration(parseInt(e.target.value))}
                 min="0"
                 className="hours-input"
               />
             </label>
             <label className="minutes-label">
-              Minutes:{" "}
+              Min Video Duration (mins):{" "}
               <input
                 type="number"
-                value={minutes}
-                onChange={(e) => setMinutes(parseInt(e.target.value))}
+                value={minVideoDuration}
+                onChange={(e) => setMinVideoDuration(parseInt(e.target.value))}
                 min="0"
-                max="59"
+                max="1440" // 24 hours in minutes
                 className="minutes-input"
               />
             </label>
