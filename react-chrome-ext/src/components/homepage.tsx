@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../css/homepage.css';
+import { exec } from 'child_process';
 
 function Homepage() {
   // radio buttons for the amount of videos
@@ -37,15 +38,30 @@ function Homepage() {
     let currentTabUrl = null;
     
     // getting current window url
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      if (tabs[0]?.url) {
-        currentTabUrl = tabs[0].url;
-        // display url in an alert for testing
-        alert("Current tab URL: " + currentTabUrl);
-        // call jaxons script
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    if (tabs[0]?.url) {
+      currentTabUrl = tabs[0].url;
+      // display url in an alert for testing
+      alert("Current tab URL: " + currentTabUrl);
+      // call jaxons script
+      callNodeScript(currentTabUrl);
+    }
+  });
+};
+function callNodeScript(urlOrFilePath: string) {
+  exec(`node html_to_txt.js ${urlOrFilePath}`, (error, stdout, stderr) => {
+      if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
       }
-    });
-  };
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+  });
+};
+
 
   // JSX for displaying in the popup
   return (
