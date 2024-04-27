@@ -26,9 +26,19 @@ function Homepage() {
   };
 
   // submit button
-  const handleSubmit = async () => {
-    // code to get current tab url
-  };
+const handleSubmit = async () => {
+  if (!selectedOption) {
+    alert("Please select an option.");
+    return;
+  }
+
+  if (wantToInputTime && (hours === 0 && minutes === 0)) {
+    alert("Please enter a time.");
+    return;
+  }
+
+  // Code to get current tab URL
+};
 
   // JSX for displaying in the popup
   return (
