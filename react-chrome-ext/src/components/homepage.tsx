@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import '../css/homepage.css';
 import { exec } from 'child_process';
+import {run} from "gpt.js";
 
 function Homepage() {
   // radio buttons for the amount of videos
@@ -30,10 +31,6 @@ function Homepage() {
       return;
     }
 
-    // Convert durations to seconds
-    const maxVideoDurationInSeconds = convertToSeconds(maxVideoDuration);
-    const minVideoDurationInSeconds = convertToSeconds(minVideoDuration);
-
     // to store url
     let currentTabUrl = null;
     
@@ -45,9 +42,15 @@ function Homepage() {
       alert("Current tab URL: " + currentTabUrl);
       // call jaxons script
       callNodeScript(currentTabUrl);
+      // Rohans script
+      const filePath = 'page.txt'; 
+      const minDuration = convertToSeconds(minVideoDuration); 
+      const maxDuration = convertToSeconds(maxVideoDuration); 
+      exec(`node html_to_txt.js' ${filePath, maxDuration, minDuration};
     }
   });
 };
+
 function callNodeScript(urlOrFilePath: string) {
   exec(`node html_to_txt.js ${urlOrFilePath}`, (error, stdout, stderr) => {
       if (error) {
