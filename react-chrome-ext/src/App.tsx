@@ -1,4 +1,6 @@
+/*global chrome*/
 import React, { useState } from "react"; 
+import './App.css';
 
 function App() {
   // radio buttons for the amount of videos
@@ -7,17 +9,24 @@ function App() {
   // to store the URL
   const [linkUrl, setLinkUrl] = useState('');
 
+  // the state of the checkbox for inputting time
+  const [wantToInputTime, setWantToInputTime] = useState(false);
+
   // when the radio button selected changes
   const handleOptionChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSelectedOption(event.target.value);
 
   };
 
+  // when the box is checked
+  const handleCheckboxChange = (event: { target: { checked: any; }; }) => {
+    setWantToInputTime(event.target.checked);
+  };
+
   // submit button
   const handleSubmit = async () => {
     // code to get current tab url
-    const [tab] = await chrome.tabs.query({active: true, currentWindow: true});
-    setLinkUrl(tab.url);  
+    
   };
 
   // what is displayed in the popup
@@ -49,10 +58,21 @@ function App() {
       <div>
         {selectedOption && <p>Selected Option: {selectedOption}</p>}
       </div>
-      <div style={{ display: 'none' }}>
-        {/* Hidden link */}
-        <a id="hidden-link" href={linkUrl} target="_blank" rel="noopener noreferrer"></a>
-      </div>   
+      <h2>Do you want to input a time?</h2>
+        <label className="checkbox"> Yes
+          <input 
+            type="checkbox" 
+            checked= {wantToInputTime}
+            onChange = {handleCheckboxChange}
+            />
+          <span className="checkmark"></span>
+        </label>
+        {wantToInputTime && (
+          <div>
+            {/* put in a slider here*/}
+            <input type="time"/>
+          </div>
+        )}
       <div>
         <button onClick={handleSubmit}>Submit</button>
       </div>

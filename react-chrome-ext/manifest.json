@@ -11,9 +11,5 @@
         "tabs",
         "activeTab",
         "scripting"
-    ],
-    "background": {
-        "scripts": ["background.js"],
-        "persistent": false
-    }
+    ]
 }

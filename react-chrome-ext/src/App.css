@@ -1,22 +1,59 @@
-.App {
-  color: white;
-  text-align: center;
+/* Checkbox */
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
 }
 
-.container {
-  width: 500rem;
-  height: 500rem;
-  background-color: green;
-
+/* Hide the browser's default checkbox */
+.checkbox input {
+  opacity: 0;
+  cursor: pointer;
 }
 
-.button {
-  background-color: #04AA6D; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
+/* Custom checkbox */
+.checkmark {
+  position: relative;
   display: inline-block;
-  font-size: 16px;
+  width: 24px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 6px;
+  margin-right: 12px;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 8px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Checkbox label */
+.label {
+  flex: 1;
+}
+
+/* Time input */
+.time-input {
+  margin-top: 20px;
 }
