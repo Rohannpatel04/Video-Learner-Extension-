@@ -1,10 +1,10 @@
-.App {
+/* .App {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 300px;
   height: 400px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f0f0f0; /* Light gray background */
+  background-color: #f0f0f0; /* Light gray background 
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -50,19 +50,19 @@
   left: 0;
   height: 20px;
   width: 20px;
-  background-color: #fff; /* White background */
+  background-color: #fff; /* White background 
   border-radius: 50%;
   border: 2px solid #ccc;
   transition: background-color 0.3s, border-color 0.3s;
 }
 
 .checkbox:hover input ~ .checkmark {
-  background-color: #f0f0f0; /* Light gray background on hover */
+  background-color: #f0f0f0; /* Light gray background on hover
   border-color: #999;
 }
 
 .checkbox input:checked ~ .checkmark {
-  background-color: #007bff; /* Blue background when checked */
+  background-color: #007bff; /* Blue background when checked
   border-color: #0056b3;
 }
 
@@ -89,7 +89,7 @@
 }
 
 .submit-button {
-  background-color: #007bff; /* Blue button background */
+  background-color: #007bff; /* Blue button background
   color: white;
   border: none;
   border-radius: 25px;
@@ -102,5 +102,5 @@
 }
 
 .submit-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-}
+  background-color: #0056b3; /* Darker blue on hover 
+} */

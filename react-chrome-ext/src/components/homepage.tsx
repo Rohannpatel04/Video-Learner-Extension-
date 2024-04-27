@@ -1,40 +1,44 @@
-/*global chrome*/
-import React, { useState } from "react"; 
-import '../css/homepage.css'; 
+import React, { useState } from "react";
+import '../css/homepage.css';
 
-function homepage() {
+function Homepage() {
   // radio buttons for the amount of videos
   const [selectedOption, setSelectedOption] = useState('');
-  
+
   // to store the URL
   const [linkUrl, setLinkUrl] = useState('');
 
   // the state of the checkbox for inputting time
   const [wantToInputTime, setWantToInputTime] = useState(false);
 
-  // when the radio button selected changes
-  const handleOptionChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-    setSelectedOption(event.target.value);
+  // state for hours and minutes
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
 
+  // when the radio button selected changes
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(event.target.value);
   };
 
   // when the box is checked
-  const handleCheckboxChange = (event: { target: { checked: any; }; }) => {
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWantToInputTime(event.target.checked);
   };
 
   // submit button
   const handleSubmit = async () => {
     // code to get current tab url
-    
   };
 
   // JSX for displaying in the popup
   return (
-    <div className="App">s
-      <div className="container">
+    <div className="popup-window">
+      <div className="title-container">
+        <h2 className="title">Video Learner</h2>
+      </div>
+      <div className="radio-container">
         <h2>Select how many videos you want</h2>
-        <div className="radio-container">
+        <div className="one-video-container">
           <label>
             <input
               type="radio"
@@ -45,7 +49,7 @@ function homepage() {
             One Video
           </label>
         </div>
-        <div className="radio-container">
+        <div className="multiple-videos-container">
           <label>
             <input
               type="radio"
@@ -56,12 +60,9 @@ function homepage() {
             Multiple Videos
           </label>
         </div>
-        <div className="selected-option">
-          {selectedOption && <p>Selected Option: {selectedOption}</p>}
-        </div>
       </div>
-      <div className="container">
-        <h2>Do you want to input a time?</h2>
+      <div className="time-input-container">
+        <h2>Do you want to give an ideal video length?</h2>
         <div className="checkbox-container">
           <label className="checkbox">
             Yes
@@ -74,17 +75,37 @@ function homepage() {
           </label>
         </div>
         {wantToInputTime && (
-          <div className="time-container">
-            <input type="time" />
+          <div className="time-dropdown-container">
+            <label className="hours-label">
+              Hours:{" "}
+              <input
+                type="number"
+                value={hours}
+                onChange={(e) => setHours(parseInt(e.target.value))}
+                min="0"
+                className="hours-input"
+              />
+            </label>
+            <label className="minutes-label">
+              Minutes:{" "}
+              <input
+                type="number"
+                value={minutes}
+                onChange={(e) => setMinutes(parseInt(e.target.value))}
+                min="0"
+                max="59"
+                className="minutes-input"
+              />
+            </label>
           </div>
         )}
       </div>
-      <div className="container">
+      <div className="submit-container">
         <button className="submit-button" onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );
+
 }
 
-
-export default homepage;
+export default Homepage;
