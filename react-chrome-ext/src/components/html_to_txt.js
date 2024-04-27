@@ -1,8 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { debug } = require('console');
 const fs = require('fs');
-const path = require('path');
 const PDFParser = require('pdf-parse');
 
 async function fetchContent(url) {
@@ -62,7 +60,7 @@ function saveToTxt(text, filename = "page.txt") {
     });
 }
 
-async function main(url) {
+export async function runConvert(url) {
     const content = await fetchContent(url);
     if (content) {
         const text = content.startsWith('<') ? extractArticleText(content) : content;
@@ -77,9 +75,9 @@ async function main(url) {
 }
 
 // Accept URL or local file path as a command-line argument
-const input = process.argv[2];
-if (!input) {
-    console.error("Please provide a URL or local PDF file path.");
-} else {
-    main(input);
-}
+// const input = process.argv[2];
+// if (!input) {
+//     console.error("Please provide a URL or local PDF file path.");
+// } else {
+//     runConvert(input);
+// }

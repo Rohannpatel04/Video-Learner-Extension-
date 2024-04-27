@@ -7,7 +7,7 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 const duration = 'any'; 
 
-async function run(filePath, maxDuration, minDuration) {
+export async function run(filePath, maxDuration, minDuration) {
   console.log("Current working directory:", process.cwd());
 
   if (!fs.existsSync(filePath)) {
@@ -112,20 +112,3 @@ function parseDurationToSeconds(duration) {
   const seconds = (match[3] ? parseInt(match[3]) : 0);
   return hours * 3600 + minutes * 60 + seconds;
 }
-const filePath = process.argv[2];
-const minDuration = parseInt(process.argv[3]);
-const maxDuration = parseInt(process.argv[4]);
-
-// Check if all required arguments are provided
-if (!filePath || isNaN(minDuration) || isNaN(maxDuration)) {
-  console.error("Usage: node your_script.js <file_path> <min_duration> <max_duration>");
-  process.exit(1); // Exit with a non-zero code to indicate an error
-}
-
-// Ensure minDuration is less than maxDuration
-if (minDuration >= maxDuration) {
-  console.error("Minimum duration must be less than maximum duration.");
-  process.exit(1);
-}
-
-run(filePath, minDuration, maxDuration);

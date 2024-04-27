@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../css/homepage.css';
-import { exec } from 'child_process';
-
+import { run } from './gpt.js';
+import { runConvert } from "./html_to_txt";
 
 function Homepage() {
   // radio buttons for the amount of videos
@@ -41,43 +41,16 @@ function Homepage() {
       // display url in an alert for testing
       alert("Current tab URL: " + currentTabUrl);
       // call jaxons script
-      callNodeScript(currentTabUrl);
+      runConvert(currentTabUrl);
       // Rohans script
       const filePath = 'page.txt'; 
       const minDuration = convertToSeconds(minVideoDuration); 
       const maxDuration = convertToSeconds(maxVideoDuration); 
-      callGPT(filePath, minDuration, maxDuration)
+      run(filePath, minDuration, maxDuration);
     }
   });
 };
 
-function callNodeScript(urlOrFilePath: string) {
-  exec(`node html_to_txt.js ${urlOrFilePath}`, (error, stdout, stderr) => {
-      if (error) {
-          console.error(`Error: ${error.message}`);
-          return;
-      }
-      if (stderr) {
-        console.error(`stderr: ${stderr}`);
-        return;
-      }
-      console.log(`stdout: ${stdout}`);
-  });
-};
-
-function callGPT(filePath: string, minDuration: number, maxDuration: number) {
-  exec(`node yourScript.js ${filePath} ${minDuration} ${maxDuration}`, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.error(`stderr: ${stderr}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-  });
-}
 
 
   // JSX for displaying in the popup
