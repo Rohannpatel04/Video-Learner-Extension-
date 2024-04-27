@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../css/homepage.css';
 import { exec } from 'child_process';
-import {run} from "gpt.js";
+
 
 function Homepage() {
   // radio buttons for the amount of videos
@@ -46,7 +46,7 @@ function Homepage() {
       const filePath = 'page.txt'; 
       const minDuration = convertToSeconds(minVideoDuration); 
       const maxDuration = convertToSeconds(maxVideoDuration); 
-      exec(`node html_to_txt.js' ${filePath, maxDuration, minDuration};
+      callGPT(filePath, minDuration, maxDuration)
     }
   });
 };
@@ -64,6 +64,20 @@ function callNodeScript(urlOrFilePath: string) {
       console.log(`stdout: ${stdout}`);
   });
 };
+
+function callGPT(filePath: string, minDuration: number, maxDuration: number) {
+  exec(`node yourScript.js ${filePath} ${minDuration} ${maxDuration}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.error(`stderr: ${stderr}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+  });
+}
 
 
   // JSX for displaying in the popup
