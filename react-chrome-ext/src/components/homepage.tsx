@@ -47,7 +47,7 @@ const handleSubmit = async () => {
         <h2 className="title">Video Learner</h2>
       </div>
       <div className="radio-container">
-        <h2>Select how many videos you want</h2>
+        <h2 className="question-one">Select how many videos you want</h2>
         <div className="one-video-container">
           <label>
             <input
@@ -72,7 +72,7 @@ const handleSubmit = async () => {
         </div>
       </div>
       <div className="time-input-container">
-        <h2>Do you want to give an ideal video length?</h2>
+        <h2 className="question-two">Do you want to give an ideal video length?</h2>
         <div className="checkbox-container">
           <label className="checkbox">
             Yes
