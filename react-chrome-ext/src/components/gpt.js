@@ -1,25 +1,22 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require('dotenv').config();
-const fs = require('fs');
 const axios = require('axios');
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 const duration = 'any'; 
+const finalVideoUrl = null;
+const finalThumbnailUrl = null;
 
-export async function run(filePath, maxDuration, minDuration) {
+export async function run(text, maxDuration, minDuration){
   console.log("Current working directory:", process.cwd());
 
-  if (!fs.existsSync(filePath)) {
-    console.log("File does not exist.");
-    return;
-  }
 
   // set the type of model we are using 
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   // change the text file to a string 
-  const content = fs.readFileSync(filePath, 'utf-8');
+  const content = text;
   const prompt = content;
 
   try {
@@ -72,8 +69,8 @@ export async function run(filePath, maxDuration, minDuration) {
             duration: videoDuration,
             thumbnail: thumbnailUrl
           };
-          const finalVideoUrl = `https://www.youtube.com/watch?v=${foundVideo.id}`;
-          const finalThumbnailUrl = foundVideo.thumbnail;
+          finalVideoUrl = `https://www.youtube.com/watch?v=${foundVideo.id}`;
+          finalThumbnailUrl = foundVideo.thumbnail;
           break;
         }
       }
@@ -102,6 +99,15 @@ export async function run(filePath, maxDuration, minDuration) {
       console.error('Error searching for YouTube video:', error.message);
     }
   }
+  
+  if (finalVideoUrl && finalThumbnailUrl) {
+    return finalVideoUrl;
+  } else {
+    console.error('No video to show');
+  }
+}
+export function getThumbnailUrl(url){
+  return 
 }
 
 // convert the duration that the youtube api gets to seconds 

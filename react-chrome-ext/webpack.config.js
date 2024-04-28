@@ -45,6 +45,7 @@ module.exports = {
             "buffer": require.resolve("buffer"),
             "zlib": require.resolve("browserify-zlib"),
             "assert": require.resolve("assert"),
+            "vm": require.resolve("vm-browserify")
         },
     },
     output: {

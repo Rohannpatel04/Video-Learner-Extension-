@@ -52,8 +52,9 @@ function Homepage() {
       // Rohans script
       const filePath = chrome.storage.session.get; 
       const minDuration = convertToSeconds(minVideoDuration); 
-      const maxDuration = convertToSeconds(maxVideoDuration); 
-      //run(filePath, minDuration, maxDuration);
+      const maxDuration = convertToSeconds(maxVideoDuration);
+      const videoUrl = run(filePath, minDuration, maxDuration);
+      alert('Video url' + videoUrl);
     }
   });
 };

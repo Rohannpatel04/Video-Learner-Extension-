@@ -22,7 +22,7 @@ async function fetchContent(url) {
     }
 }
 
-// //async function extractTextFromPDF(pdfBuffer) {
+//async function extractTextFromPDF(pdfBuffer) {
 //     try {
 //         const data = await PDFParser(pdfBuffer);
 //         return data.text;
@@ -30,7 +30,7 @@ async function fetchContent(url) {
 //         console.error("Failed to extract text from PDF:", error);
 //         return null;
 //     }
-// //}
+//}
 
 function extractArticleText(html) {
     const $ = cheerio.load(html);
