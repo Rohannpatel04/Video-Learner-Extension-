@@ -1,5 +1,5 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+import axios from 'axios';
+import cheerio from 'cheerio';
 
 async function fetchContent(url) {
     try {
@@ -22,16 +22,6 @@ async function fetchContent(url) {
     }
 }
 
-//async function extractTextFromPDF(pdfBuffer) {
-//     try {
-//         const data = await PDFParser(pdfBuffer);
-//         return data.text;
-//     } catch (error) {
-//         console.error("Failed to extract text from PDF:", error);
-//         return null;
-//     }
-//}
-
 function extractArticleText(html) {
     const $ = cheerio.load(html);
 
@@ -46,15 +36,20 @@ function extractArticleText(html) {
 }
 
 export async function runConvert(url) {
-    const content = await fetchContent(url);
-    if (content) {
-        const text = content.startsWith('<') ? extractArticleText(content) : content;
-        if (text) {
-            return text;
+    try {
+        const content = await fetchContent(url);
+        if (content) {
+            const text = content.startsWith('<') ? extractArticleText(content) : content;
+            if (text) {
+                return text;
+            } else {
+                console.error("Failed to extract content text.");
+            }
         } else {
-            console.error("Failed to extract content text.");
+            console.error("Failed to fetch content from the provided URL or PDF file.");
         }
-    } else {
-        console.error("Failed to fetch content from the provided URL or PDF file.");
+    } catch (error) {
+        console.error("Error in runConvert:", error);
+        return null;
     }
 }
