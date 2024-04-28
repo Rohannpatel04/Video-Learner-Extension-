@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../css/homepage.css';
 import { run } from './gpt.js';
 import { runConvert } from "./html_to_txt";
+import process from 'process';
 
 
 function Homepage() {
@@ -51,7 +52,7 @@ function Homepage() {
         }
     });
       // Rohans script
-      
+      // put the videUrl and thumbnailUrl into the chrome storage
 
   // const MyComponent: React.FC = () => {
   //   const [data, setData] = useState<{ [key: string]: any }>({});
