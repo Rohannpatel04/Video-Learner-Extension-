@@ -24,108 +24,25 @@
   font-family: Arial, sans-serif; /* Modern font */
 }
 
-.radio-container {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.checkbox-container {
-  margin-bottom: 10px;
-}
-
-.radio-container label,
-.checkbox-container label {
-  display: block;
-  font-size: 20px; /* Increase font size for label text */
-}
-
-.radio-container input[type="radio"],
-.checkbox-container input[type="checkbox"] {
-  width: 20px; /* Increase width of radio button */
-  height: 20px; /* Increase height of radio button */
-}
-
-.checkbox {
-  display: inline-block;
-  position: relative;
-  padding-left: 30px;
-  cursor: pointer;
-  font-size: 16px;
-  user-select: none;
-  color: #333;
-}
-
-.checkbox input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #fff; /* White background */
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.checkbox:hover input ~ .checkmark {
-  background-color: #f0f0f0; /* Light gray background on hover */
-  border-color: #999;
-}
-
-.checkbox input:checked ~ .checkmark {
-  background-color: #007bff; /* Blue background when checked */
-  border-color: #0056b3;
-}
-
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.checkbox input:checked ~ .checkmark:after {
-  display: block;
-}
-
-.checkbox .checkmark:after {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 3px;
-  width: 4px;
-  height: 8px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
 .time-dropdown-container {
   margin-top: 10px;
   border: 2px solid black; /* Add border to time dropdown container */
   padding: 10px; /* Add padding to create space between inputs and border */
 }
 
-.hours-label {
-  font-weight: bold;
-  font-size: 16px; /* Increase font size for label text */
-  margin-bottom: 5px;
-}
-
-.minutes-label {
+.min-video-duration-label {
   font-weight: bold;
   font-size: 16px; /* Increase font size for label text */
   margin-top: 10px;
 }
 
-.hours-input {
+.max-video-duration-label {
+  font-weight: bold;
+  font-size: 16px; /* Increase font size for label text */
+  margin-bottom: 5px;
+}
+
+.min-video-duration-input {
   display: block;
   font-size: 15px; /* Increase font size */
   width: calc(100% - 20px); /* Adjust width to account for padding */
@@ -133,7 +50,7 @@
   margin-bottom: 10px; /* Add margin-bottom to create space between inputs */
 }
 
-.minutes-input {
+.max-video-duration-input {
   display: block;
   font-size: 15px; /* Increase font size */
   width: calc(100% - 20px); /* Adjust width to account for padding */

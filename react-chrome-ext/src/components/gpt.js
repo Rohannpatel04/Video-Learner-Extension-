@@ -1,16 +1,14 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-require('dotenv').config();
 const axios = require('axios');
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
+const genAI = new GoogleGenerativeAI("AIzaSyCst_BGyrAaIBmQ_Q0o3jFajdEl6b1Yn84");
 
 const duration = 'any'; 
 var finalVideoUrl = null;
 var finalThumbnailUrl = null;
 
 export async function run(text, maxDuration, minDuration){
-  console.log("Current working directory:", process.cwd());
-
 
   // set the type of model we are using 
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -29,7 +27,7 @@ export async function run(text, maxDuration, minDuration){
     // condense the summary to 10 words 
     const summary = text.trim().split(/\s+/).slice(0, 10).join(' ');
 
-    const apiKey = process.env.YT_API_KEY;
+    const apiKey = "AIzaSyAGWUm1xkJa7aQhm5aj-7W5OaTRnWCBeGM";
 
     // conduct a youtube search 
     const searchResponse = await axios.get('https://www.googleapis.com/youtube/v3/search', {

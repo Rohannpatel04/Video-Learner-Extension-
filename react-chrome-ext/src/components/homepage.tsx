@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import '../css/homepage.css';
-import { run } from './gpt.js';
 import { runConvert } from "./html_to_txt";
-import process from 'process';
-
 
 function Homepage() {
-  // radio buttons for the amount of videos
-  // const [selectedOption, setSelectedOption] = useState('');
-
-  // the state of the checkbox for inputting time
-  const [wantToInputTime, setWantToInputTime] = useState(false);
-
   // state for max and min video durations in minutes
   const [maxVideoDuration, setMaxVideoDuration] = useState(0);
   const [minVideoDuration, setMinVideoDuration] = useState(0);
@@ -21,15 +12,13 @@ function Homepage() {
     return minutes * 60;
   };
 
-  // when the radio button selected changes
-  // const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSelectedOption(event.target.value);
-  // };
-
   // submit button
   const handleSubmit = async () => {
-    if (wantToInputTime && (maxVideoDuration === 0 || minVideoDuration === 0)) {
-      alert("Please enter both maximum and minimum video durations.");
+    if (maxVideoDuration <= 0)  {
+      alert("Please enter at least maximum video durations.");
+      return;
+    } else if (minVideoDuration > maxVideoDuration){
+      alert("Please enter a minimum video duration that is less than the maximum video duration");
       return;
     }
 
@@ -37,55 +26,17 @@ function Homepage() {
     let currentTabUrl = null;
     
     // getting current window url
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    if (tabs[0]?.url) {
-      currentTabUrl = tabs[0].url;
-      // display url in an alert for testing
-      alert("Current tab URL: " + currentTabUrl);
-      // call jaxons script
-      const text = runConvert();
-      chrome.storage.session.set({ 'text': text }, () => {
-        if (chrome.runtime.lastError) {
-            console.error("Failed to save text to session storage:", chrome.runtime.lastError.message);
-        } else {
-            console.log("Text saved to session storage.");
-        }
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      if (tabs[0]?.url) {
+        currentTabUrl = tabs[0].url;
+        // display url in an alert for testing
+        //alert("Current tab URL: " + currentTabUrl);
+        // call jaxons script
+        const text = runConvert(currentTabUrl, 1, 10);
+        alert('YouTube URL' + text);
+      }
     });
-      // Rohans script
-      // put the videUrl and thumbnailUrl into the chrome storage
-
-  // const MyComponent: React.FC = () => {
-  //   const [data, setData] = useState<{ [key: string]: any }>({});
-
-  //   useEffect(() => {
-  //     // Retrieve data from Chrome storage
-  //     chrome.storage.sync.get(['key1', 'key2'], function(result) {
-  //       setData(result);
-  //     });
-  //   }, []); // Run only once on component mount
-
-  //   return (
-  //     <div>
-  //       <h1>Data from Chrome Storage</h1>
-  //       <p>Value of key1: {data.key1}</p>
-  //       <p>Value of key2: {data.key2}</p>
-  //     </div>
-  //   );
-  // }
-
-  // export default MyComponent;
-        
-  //       const filePath = chrome.storage.session.get;
-  //       alert(filePath);
-  //       const minDuration = convertToSeconds(minVideoDuration); 
-  //       const maxDuration = convertToSeconds(maxVideoDuration);
-  //       const videoUrl = run(filePath, minDuration, maxDuration);
-  //       alert('Video url' + videoUrl);
-       }
-     });
-  };
-
-
+  };    
 
   // JSX for displaying in the popup
   return (
@@ -93,69 +44,31 @@ function Homepage() {
       <div className="title-container">
         <h2 className="title">Video Learner</h2>
       </div>
-      {/* <div className="radio-container">
-        <h2 className="question-one">Select how many videos you want</h2>
-        <div className="one-video-container">
-          <label>
-            <input
-              type="radio"
-              value="1"
-              checked={selectedOption === '1'}
-              onChange={handleOptionChange}
-            />
-            One Video
-          </label>
-        </div>
-        <div className="multiple-videos-container">
-          <label>
-            <input
-              type="radio"
-              value="2"
-              checked={selectedOption === '2'}
-              onChange={handleOptionChange}
-            />
-            Multiple Videos
-          </label>
-        </div>
-      </div> */}
       <div className="time-input-container">
-        <h2 className="question-two">Do you want to give an ideal video length?</h2>
-        <div className="checkbox-container">
-          <label className="checkbox">
-            Yes
-            <input
-              type="checkbox"
-              checked={wantToInputTime}
-              onChange={() => setWantToInputTime(!wantToInputTime)}
-            />
-            <span className="checkmark"></span>
-          </label>
-        </div>
-        {wantToInputTime && (
           <div className="time-dropdown-container">
-            <label className="hours-label">
-              Max Video Duration (mins):{" "}
-              <input
-                type="number"
-                value={maxVideoDuration}
-                onChange={(e) => setMaxVideoDuration(parseInt(e.target.value))}
-                min="0"
-                className="hours-input"
-              />
-            </label>
-            <label className="minutes-label">
+            <label className="min-video-duration-label">
               Min Video Duration (mins):{" "}
               <input
                 type="number"
                 value={minVideoDuration}
                 onChange={(e) => setMinVideoDuration(parseInt(e.target.value))}
                 min="0"
-                max="1440" // 24 hours in minutes
-                className="minutes-input"
+                // 24 hours in minutes
+                max="1440" 
+                className="min-video-duration-input"
+              />
+            </label>
+            <label className="max-video-duration-label">
+              Max Video Duration (mins):{" "}
+              <input
+                type="number"
+                value={maxVideoDuration}
+                onChange={(e) => setMaxVideoDuration(parseInt(e.target.value))}
+                min="0"
+                className="max-video-duration-input"
               />
             </label>
           </div>
-        )}
       </div>
       <div className="submit-container">
         <button className="submit-button" onClick={handleSubmit}>Submit</button>

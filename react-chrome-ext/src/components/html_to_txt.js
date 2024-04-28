@@ -1,5 +1,9 @@
-import axios from 'axios';
-import cheerio from 'cheerio';
+import { run } from './gpt.js';
+
+
+const axios = require('axios');
+const cheerio = require('cheerio');
+
 
 async function fetchContent(url) {
     try {
@@ -35,13 +39,15 @@ function extractArticleText(html) {
     return $('body').text().trim();
 }
 
-export async function runConvert(url) {
+export async function runConvert(url, minDuration, maxDuration) {
+    console.error("Reached the conversion");
     try {
         const content = await fetchContent(url);
+
         if (content) {
-            const text = content.startsWith('<') ? extractArticleText(content) : content;
+            const text = extractArticleText(content);
             if (text) {
-                return text;
+                return run(text, minDuration, maxDuration);
             } else {
                 console.error("Failed to extract content text.");
             }
