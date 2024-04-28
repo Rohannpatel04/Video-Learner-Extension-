@@ -1,9 +1,7 @@
 import { run } from './gpt.js';
 
-
 const axios = require('axios');
 const cheerio = require('cheerio');
-
 
 async function fetchContent(url) {
     try {

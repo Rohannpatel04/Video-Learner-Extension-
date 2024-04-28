@@ -32,8 +32,10 @@ function Homepage() {
         // display url in an alert for testing
         //alert("Current tab URL: " + currentTabUrl);
         // call jaxons script
-        const text = runConvert(currentTabUrl, 1, 10);
-        alert('YouTube URL' + text);
+        runConvert(currentTabUrl, 1, 10).then(text => {
+          // send the returned text to the ytpage
+          alert('YouTube URL' + text);
+        });
       }
     });
   };    
