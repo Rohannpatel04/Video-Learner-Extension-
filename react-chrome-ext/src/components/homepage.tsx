@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../css/homepage.css';
 import { run } from './gpt.js';
 import { runConvert } from "./html_to_txt";
+
 
 function Homepage() {
   // radio buttons for the amount of videos
@@ -50,14 +51,38 @@ function Homepage() {
         }
     });
       // Rohans script
-      const filePath = chrome.storage.session.get; 
-      const minDuration = convertToSeconds(minVideoDuration); 
-      const maxDuration = convertToSeconds(maxVideoDuration);
-      const videoUrl = run(filePath, minDuration, maxDuration);
-      alert('Video url' + videoUrl);
-    }
-  });
-};
+      
+
+  // const MyComponent: React.FC = () => {
+  //   const [data, setData] = useState<{ [key: string]: any }>({});
+
+  //   useEffect(() => {
+  //     // Retrieve data from Chrome storage
+  //     chrome.storage.sync.get(['key1', 'key2'], function(result) {
+  //       setData(result);
+  //     });
+  //   }, []); // Run only once on component mount
+
+  //   return (
+  //     <div>
+  //       <h1>Data from Chrome Storage</h1>
+  //       <p>Value of key1: {data.key1}</p>
+  //       <p>Value of key2: {data.key2}</p>
+  //     </div>
+  //   );
+  // }
+
+  // export default MyComponent;
+        
+  //       const filePath = chrome.storage.session.get;
+  //       alert(filePath);
+  //       const minDuration = convertToSeconds(minVideoDuration); 
+  //       const maxDuration = convertToSeconds(maxVideoDuration);
+  //       const videoUrl = run(filePath, minDuration, maxDuration);
+  //       alert('Video url' + videoUrl);
+       }
+     });
+  };
 
 
 

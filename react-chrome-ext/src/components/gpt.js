@@ -5,8 +5,8 @@ const axios = require('axios');
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 const duration = 'any'; 
-const finalVideoUrl = null;
-const finalThumbnailUrl = null;
+var finalVideoUrl = null;
+var finalThumbnailUrl = null;
 
 export async function run(text, maxDuration, minDuration){
   console.log("Current working directory:", process.cwd());
