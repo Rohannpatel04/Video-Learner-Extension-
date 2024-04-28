@@ -1,7 +1,5 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const fs = require('fs');
-const PDFParser = require('pdf-parse');
 
 async function fetchContent(url) {
     try {
@@ -9,12 +7,11 @@ async function fetchContent(url) {
             const response = await axios.get(url);
             return response.data;
         } else if (url.startsWith('file:///')) {
-            const filePath = decodeURI(url.substring(8)); // Remove 'file://'
-            const pdfBuffer = fs.readFileSync(filePath);
-            return await extractTextFromPDF(pdfBuffer);
+            console.error("Local file access not supported in browser.");
+            return null;
         } else if (url.endsWith('.pdf')) {
-            const pdfBuffer = fs.readFileSync(url);
-            return await extractTextFromPDF(pdfBuffer);
+            console.error("PDF file access not supported in browser.");
+            return null;
         } else {
             console.error("Unsupported URL format.");
             return null;
@@ -25,17 +22,15 @@ async function fetchContent(url) {
     }
 }
 
-
-
-async function extractTextFromPDF(pdfBuffer) {
-    try {
-        const data = await PDFParser(pdfBuffer);
-        return data.text;
-    } catch (error) {
-        console.error("Failed to extract text from PDF:", error);
-        return null;
-    }
-}
+// //async function extractTextFromPDF(pdfBuffer) {
+//     try {
+//         const data = await PDFParser(pdfBuffer);
+//         return data.text;
+//     } catch (error) {
+//         console.error("Failed to extract text from PDF:", error);
+//         return null;
+//     }
+// //}
 
 function extractArticleText(html) {
     const $ = cheerio.load(html);
@@ -50,22 +45,12 @@ function extractArticleText(html) {
     return $('body').text().trim();
 }
 
-function saveToTxt(text, filename = "page.txt") {
-    fs.writeFile(filename, text, (err) => {
-        if (err) {
-            console.error("Failed to save text:", err);
-            return;
-        }
-        console.log(`Text saved to ${filename}`);
-    });
-}
-
 export async function runConvert(url) {
     const content = await fetchContent(url);
     if (content) {
         const text = content.startsWith('<') ? extractArticleText(content) : content;
         if (text) {
-            saveToTxt(text);
+            return text;
         } else {
             console.error("Failed to extract content text.");
         }
@@ -73,11 +58,3 @@ export async function runConvert(url) {
         console.error("Failed to fetch content from the provided URL or PDF file.");
     }
 }
-
-// Accept URL or local file path as a command-line argument
-// const input = process.argv[2];
-// if (!input) {
-//     console.error("Please provide a URL or local PDF file path.");
-// } else {
-//     runConvert(input);
-// }

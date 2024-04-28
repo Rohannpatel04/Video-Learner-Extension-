@@ -41,12 +41,19 @@ function Homepage() {
       // display url in an alert for testing
       alert("Current tab URL: " + currentTabUrl);
       // call jaxons script
-      runConvert(currentTabUrl);
+      const text = runConvert();
+      chrome.storage.session.set({ 'text': text }, () => {
+        if (chrome.runtime.lastError) {
+            console.error("Failed to save text to session storage:", chrome.runtime.lastError.message);
+        } else {
+            console.log("Text saved to session storage.");
+        }
+    });
       // Rohans script
-      const filePath = 'page.txt'; 
+      const filePath = chrome.storage.session.get; 
       const minDuration = convertToSeconds(minVideoDuration); 
       const maxDuration = convertToSeconds(maxVideoDuration); 
-      run(filePath, minDuration, maxDuration);
+      //run(filePath, minDuration, maxDuration);
     }
   });
 };
