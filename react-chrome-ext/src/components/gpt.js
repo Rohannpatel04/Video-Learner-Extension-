@@ -1,14 +1,13 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require('axios');
 
-
 const genAI = new GoogleGenerativeAI("AIzaSyCst_BGyrAaIBmQ_Q0o3jFajdEl6b1Yn84");
 
 const duration = 'any'; 
 var finalVideoUrl = null;
 var finalThumbnailUrl = null;
 
-export async function run(text, maxDuration, minDuration){
+export async function run(text, minDuration, maxDuration){
 
   // set the type of model we are using 
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });

@@ -32,7 +32,9 @@ function Homepage() {
         // display url in an alert for testing
         //alert("Current tab URL: " + currentTabUrl);
         // call jaxons script
-        runConvert(currentTabUrl, 1, 10).then(text => {
+        const minLength = convertToSeconds(minVideoDuration);
+        const maxLength = convertToSeconds(maxVideoDuration);
+        runConvert(currentTabUrl, minLength, maxLength).then(text => {
           // send the returned text to the ytpage
           alert('YouTube URL' + text);
         });
