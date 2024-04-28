@@ -98,7 +98,7 @@ export async function run(text, minDuration, maxDuration){
   }
   
   if (finalVideoUrl && finalThumbnailUrl) {
-    return finalVideoUrl;
+    return {finalVideoUrl, finalThumbnailUrl};
   } else {
     console.error('No video to show');
   }

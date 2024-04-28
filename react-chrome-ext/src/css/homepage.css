@@ -1,80 +1,76 @@
 .popup-window {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 300px;
-  min-height: 350px; /* Set minimum height */
-  margin: 0 auto;
   padding: 20px;
-  background-color: #f0f0f0; /* Light gray background */
-  border: 2px solid black; /* Border color changed to black */
+  border: 2px solid #fac3a3;
   border-radius: 10px;
-  z-index: auto;
+  margin: 0 auto;
 }
 
 .title-container {
   text-align: center;
-  z-index: auto; /* Set z-index to auto */
 }
 
 .title {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  font-size: 30px; /* Increase font size */
-  font-weight: bold;
-  color: #007bff; /* Blue color */
-  font-family: Arial, sans-serif; /* Modern font */
+  margin: 0;
+  color: #fe5d00;
+}
+
+.time-input-container {
+  margin-top: 20px;
 }
 
 .time-dropdown-container {
-  margin-top: 10px;
-  border: 2px solid black; /* Add border to time dropdown container */
-  padding: 10px; /* Add padding to create space between inputs and border */
+  display: flex;
+  flex-direction: column;
 }
 
-.min-video-duration-label {
-  font-weight: bold;
-  font-size: 16px; /* Increase font size for label text */
-  margin-top: 10px;
-}
-
+.min-video-duration-label,
 .max-video-duration-label {
-  font-weight: bold;
-  font-size: 16px; /* Increase font size for label text */
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
-.min-video-duration-input {
-  display: block;
-  font-size: 15px; /* Increase font size */
-  width: calc(100% - 20px); /* Adjust width to account for padding */
-  padding: 10px; /* Add padding to increase size of inputs */
-  margin-bottom: 10px; /* Add margin-bottom to create space between inputs */
-}
-
+.min-video-duration-input,
 .max-video-duration-input {
-  display: block;
-  font-size: 15px; /* Increase font size */
-  width: calc(100% - 20px); /* Adjust width to account for padding */
-  padding: 10px; /* Add padding to increase size of inputs */
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 .submit-container {
-  text-align: center; /* Center the submit button */
-  margin-top: 30px; /* Set original margin-top */
+  text-align: center;
 }
 
 .submit-button {
-  background-color: #007bff; /* Blue button background */
-  color: white;
+  padding: 10px 20px;
+  background-color: #ff782a;
+  color: #fff;
   border: none;
-  border-radius: 25px;
-  padding: 15px 30px; /* Adjust padding to make all buttons the same size */
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: background-color 0.3s;
 }
 
 .submit-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color:#rgb(255, 106, 0)
+}
+
+.thumbnail-container {
+  margin-top: 20px;
+}
+
+.thumbnail-link {
+  display: block;
+  text-align: center;
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.thumbnail-image:hover {
+  transform: scale(1.1);
 }
