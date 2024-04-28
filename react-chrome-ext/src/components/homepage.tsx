@@ -15,7 +15,7 @@ function Homepage() {
   // submit button
   const handleSubmit = async () => {
     if (maxVideoDuration <= 0)  {
-      alert("Please enter at least maximum video durations.");
+      alert("Please enter at least a maximum video duration.");
       return;
     } else if (minVideoDuration > maxVideoDuration){
       alert("Please enter a minimum video duration that is less than the maximum video duration");

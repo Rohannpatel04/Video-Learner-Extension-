@@ -76,9 +76,9 @@ export async function run(text, maxDuration, minDuration){
       // If the youtube video is found we save the youtube video link to the variable: video URL 
       if (foundVideo) {
         const videoUrl = `https://www.youtube.com/watch?v=${foundVideo.id}`;
-        console.log("Found video:", foundVideo.title);
-        console.log("Video URL:", videoUrl);
-        console.log("Thumbnail URL:", foundVideo.thumbnail);
+        console.error("Found video:", foundVideo.title);
+        console.error("Video URL:", videoUrl);
+        console.error("Thumbnail URL:", foundVideo.thumbnail);
 
       // If there are no youtube videos within the time frame
       } else {
