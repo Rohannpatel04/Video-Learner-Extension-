@@ -8,7 +8,6 @@
         "default_title": "Video Learner"
     },
     "permissions": [
-        "tabs",
         "activeTab"
     ]
 }
