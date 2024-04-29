@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import '../css/homepage.css';
 import { runConvert } from "./html_to_txt";
+// for linking the UI states
 import { Link } from "react-router-dom";
 
 function Homepage() {

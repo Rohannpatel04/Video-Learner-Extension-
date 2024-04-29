@@ -1,5 +1,6 @@
 const path = require("path");
 const HTMLPlugin = require("html-webpack-plugin");
+// used to copy files from one location to another when building
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
@@ -29,9 +30,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new CopyPlugin({
-            patterns: [{ from: "manifest.json", to: "../manifest.json" }],
-        }),
         ...getHtmlPlugins(["index"]),
     ],
     resolve: {

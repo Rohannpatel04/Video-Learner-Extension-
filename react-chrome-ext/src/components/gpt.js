@@ -8,24 +8,22 @@ let finalVideoUrl = null;
 let finalThumbnailUrl = null;
 
 export async function run(text, minDuration, maxDuration){
-
   // set the type of model we are using 
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-  // change the text file to a string 
-  const content = text;
-  const prompt = content;
+  // assign text to a var so it can be used inside try
+  // don't know why you can't just pass the param text
+  const prompt = text;
 
   try {
-
     // call the generative ai model to summarize within 10 words
     const result = await model.generateContent(prompt, { length: 10 });
-    const response = await result.response;
-    const text = await response.text();
+    const response = result.response;
+    const text = response.text();
 
     // condense the summary to 10 words 
     const summary = text.trim().split(/\s+/).slice(0, 10).join(' ');
-
+    // get apikey
     const apiKey = "AIzaSyAGWUm1xkJa7aQhm5aj-7W5OaTRnWCBeGM";
 
     // conduct a youtube search 
@@ -38,10 +36,10 @@ export async function run(text, minDuration, maxDuration){
         videoDuration: duration
       }
     });
-
+    
     let foundVideo = null;
 
-    if (searchResponse.data && searchResponse.data.items && searchResponse.data.items.length > 0) {
+    if (searchResponse.data?.items?.length > 0) {
       for (const item of searchResponse.data.items) {
         const videoId = item.id.videoId;
         const videoTitle = item.snippet.title;
@@ -90,7 +88,7 @@ export async function run(text, minDuration, maxDuration){
     }
   
   } catch (error) {
-    if (error.response && error.response.data && error.response.data.error && error.response.data.error.message) {
+    if (error.response?.data?.error?.message) {
       alert('Error searching for YouTube video:', error.response.data.error.message);
     } else {
       alert('Error searching for YouTube video:', error.message);
