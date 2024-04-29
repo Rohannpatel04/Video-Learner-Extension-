@@ -4,8 +4,8 @@ const axios = require('axios');
 const genAI = new GoogleGenerativeAI("AIzaSyCst_BGyrAaIBmQ_Q0o3jFajdEl6b1Yn84");
 
 const duration = 'any'; 
-var finalVideoUrl = null;
-var finalThumbnailUrl = null;
+let finalVideoUrl = null;
+let finalThumbnailUrl = null;
 
 export async function run(text, minDuration, maxDuration){
 
@@ -91,7 +91,7 @@ export async function run(text, minDuration, maxDuration){
   
   } catch (error) {
     if (error.response && error.response.data && error.response.data.error && error.response.data.error.message) {
-      console.error('Error searching for YouTube video:', error.response.data.error.message);
+      alert('Error searching for YouTube video:', error.response.data.error.message);
     } else {
       console.error('Error searching for YouTube video:', error.message);
     }
