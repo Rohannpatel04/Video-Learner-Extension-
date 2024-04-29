@@ -81,19 +81,19 @@ export async function run(text, minDuration, maxDuration){
 
       // If there are no youtube videos within the time frame
       } else {
-        console.error('No YouTube video found within the specified duration range.');
+        alert('No YouTube video found within the specified duration range.');
       }
 
       // If there are no youtube videos on the topic 
     } else {
-      console.error('No YouTube video found for the summary:', summary);
+      alert('No YouTube video found for the summary:', summary);
     }
   
   } catch (error) {
     if (error.response && error.response.data && error.response.data.error && error.response.data.error.message) {
       alert('Error searching for YouTube video:', error.response.data.error.message);
     } else {
-      console.error('Error searching for YouTube video:', error.message);
+      alert('Error searching for YouTube video:', error.message);
     }
   }
   

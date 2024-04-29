@@ -15,7 +15,7 @@ async function fetchContent(url) {
             console.error("PDF file access not supported in browser.");
             return null;
         } else {
-            console.error("Unsupported URL format.");
+            alert("Unsupported URL format.");
             return null;
         }
     } catch (error) {
