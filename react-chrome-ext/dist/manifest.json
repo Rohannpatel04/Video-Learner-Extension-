@@ -1,8 +1,8 @@
 {
-    "version": "1.0.4",
+    "version": "1.0.2",
     "manifest_version": 3,
     "name": "Video Learner Extension",
-    "description": "Find youtube videos relevent to the text information on the page. User selects min and max video length.",
+    "description": "This is a Chrome extension built with React and TypeScript that will find youtube videos relevent to the text information on the page. User selects one or more videos and how long they should be.",
     "action": {
         "default_popup": "dist/js/index.html",
         "default_title": "Video Learner"
